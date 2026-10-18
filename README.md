@@ -78,8 +78,8 @@ Clone the repository:
 
 ```bash
 # Clone the repository
-git clone [https://github.com/Wendo99/Portfolio_Optimization_Demo.git](https://github.com/Wendo99/Portfolio_Optimization_Demo.git)
-cd Portfolio_Optimization_Demo
+git clone [https://github.com/Wendo99/QAOA-Portfolio-Optimization.git](https://github.com/Wendo99/QAOA-Portfolio-Optimization.git)
+cd QAOA-Portfolio-Optimization
 
 # Install dependencies via uv
 uv sync
