@@ -69,7 +69,7 @@ def grid_search(qaoa_p1: QAOA, cfg: Config) -> GridSearch:
 
 
 def initial_point(beta0: float, gamma0: float, reps: int) -> np.ndarray:
-    """Repeat the p = 1 optimum in every layer (= INTERP for p = 2, Zhou et al. 2020)."""
+    """Repeat the p = 1 optimum in every layer (= INTERP for p = 2)."""
     return np.concatenate([np.full(reps, beta0), np.full(reps, gamma0)])
 
 

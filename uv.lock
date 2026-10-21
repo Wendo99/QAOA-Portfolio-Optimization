@@ -735,33 +735,6 @@ wheels = [
 ]
 
 [[package]]
-name = "portfolio-optimization-demo"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "matplotlib" },
-    { name = "numpy" },
-    { name = "pandas" },
-    { name = "pylatexenc" },
-    { name = "qiskit" },
-    { name = "qiskit-optimization" },
-    { name = "scipy" },
-    { name = "yfinance" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "matplotlib", specifier = ">=3.11.2" },
-    { name = "numpy", specifier = ">=2.5.3" },
-    { name = "pandas", specifier = ">=3.0.6" },
-    { name = "pylatexenc", specifier = ">=2.11" },
-    { name = "qiskit", specifier = ">=2.5.2" },
-    { name = "qiskit-optimization", specifier = ">=0.7.0" },
-    { name = "scipy", specifier = ">=1.18.1" },
-    { name = "yfinance", specifier = ">=1.7.0" },
-]
-
-[[package]]
 name = "protobuf"
 version = "7.36.2"
 source = { registry = "https://pypi.org/simple" }
@@ -822,6 +795,33 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b0/ed/fa23d28713004418bbf2407127f80f385bfb0bf4e677bef02c25c27b00ee/pytz-2026.4.tar.gz", hash = "sha256:464303645bafafd72418898368b2429458f709cf1eb6a15372fbcc396b64da63", size = 318444, upload-time = "2026-09-24T03:58:40.443Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d5/11/e3df59614bebe0ca50c905442603eda64ae7ac19811d4e4f74aa2d51ca85/pytz-2026.4-py2.py3-none-any.whl", hash = "sha256:9d514388fbc89ca0833203464272ac485b8828568ab73532f5020f17e892a0ff", size = 506747, upload-time = "2026-09-24T03:58:38.629Z" },
+]
+
+[[package]]
+name = "qaoa-portfolio-optimization"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "matplotlib" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "pylatexenc" },
+    { name = "qiskit" },
+    { name = "qiskit-optimization" },
+    { name = "scipy" },
+    { name = "yfinance" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "matplotlib", specifier = ">=3.11.2" },
+    { name = "numpy", specifier = ">=2.5.3" },
+    { name = "pandas", specifier = ">=3.0.6" },
+    { name = "pylatexenc", specifier = ">=2.11" },
+    { name = "qiskit", specifier = ">=2.5.2" },
+    { name = "qiskit-optimization", specifier = ">=0.7.0" },
+    { name = "scipy", specifier = ">=1.18.1" },
+    { name = "yfinance", specifier = ">=1.7.0" },
 ]
 
 [[package]]

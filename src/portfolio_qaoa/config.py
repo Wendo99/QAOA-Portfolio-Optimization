@@ -19,7 +19,7 @@ class Config:
     lam: float = 0.5  # risk/return trade-off λ
 
     # Circuit
-    reps: int = 1  # p
+    reps: int = 2  # p
 
     # Grid search (always at p = 1): β ∈ [0, π), γ ∈ [0, gamma_max]
     gamma_max: float = 16 * np.pi
