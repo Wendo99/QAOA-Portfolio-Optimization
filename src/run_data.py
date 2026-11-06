@@ -2,11 +2,12 @@
 
 Stocks as in Baker et al. (2022): GOOG, AMZN, FB (now META), NVDA.
 Period: 31.12.2024 close as base → full-year 2025 returns
-Result: mu (expected returns) and sigma (covariance matrix),
-        frozen in portfolio_data.npz for all further steps.
+Result: mu (expected returns) and sigma (covariance matrix), frozen in
+portfolio_data.npz for all further steps.
 """
 
-from portfolio_qaoa.data import (DataConfig, annualized_moments, load_prices, save,
+from portfolio_qaoa.data import (DataConfig, annualized_moments, load_prices,
+                                 save,
                                  slide_table)
 
 

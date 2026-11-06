@@ -1,4 +1,5 @@
-"""QAOA for mean-variance portfolio optimization (MVPO) with a budget constraint."""
+"""QAOA for mean-variance portfolio optimization (MVPO) with a budget
+constraint."""
 
 import itertools
 from pathlib import Path
@@ -7,12 +8,15 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from portfolio_qaoa.config import ROOT, Config
-from portfolio_qaoa.plots import (PRESENTATION_RC, plot_circuit, plot_convergence,
+from portfolio_qaoa.plots import (PRESENTATION_RC, plot_circuit,
+                                  plot_convergence,
                                   plot_distribution, plot_landscape)
 from portfolio_qaoa.qaoa import run
 from portfolio_qaoa.report import analyze, print_summary, save_results
 
-IMAGES = ("convergence", "energy_landscape", "measurement_distribution", "qaoa_circuit")
+
+IMAGES = ("convergence", "energy_landscape", "measurement_distribution",
+          "qaoa_circuit")
 
 
 def _tagged(stem: str, tag: str) -> str:
@@ -37,15 +41,20 @@ def _output_paths(tag: str) -> tuple[Path, dict[str, Path]]:
 
 
 def main(cfg: Config | None = None, tag: str = "") -> dict:
-    """Run QAOA and write results/results[_tag][_k].json and images/*[_tag][_k].png.
+    """Run QAOA and write results/results[_tag][_k].json and images/*[_tag][
+    _k].png.
 
     Existing files are never overwritten: see _output_paths for the counter k.
     """
     cfg = cfg or Config()
     r = run(cfg)
-    print(f"Starting point from grid search: β = {r.grid.beta0:.3f}, γ = {r.grid.gamma0:.3f}")
-    print(f"Optimized: γ* = {np.round(r.gamma_opt, 4)}, β* = {np.round(r.beta_opt, 4)}, "
-          f"F_C = {r.result.fun:.4f} after {len(r.history)} evaluations")
+    print(
+        f"Starting point from grid search: β = {r.grid.beta0:.3f}, "
+        f"γ = {r.grid.gamma0:.3f}")
+    print(
+        f"Optimized: γ* = {np.round(r.gamma_opt, 4)}, β* = "
+        f"{np.round(r.beta_opt, 4)}, "
+        f"F_C = {r.result.fun:.4f} after {len(r.history)} evaluations")
 
     summary = analyze(r.pf, r.prob)
     print_summary(r.pf, summary)
@@ -56,9 +65,11 @@ def main(cfg: Config | None = None, tag: str = "") -> dict:
     with plt.rc_context(PRESENTATION_RC):
         plot_convergence(r.history, cfg.reps, images["convergence"])
         plot_landscape(r.grid, images["energy_landscape"])
-        plot_distribution(r.pf, r.prob, cfg, images["measurement_distribution"])
+        plot_distribution(r.pf, r.prob, cfg,
+                          images["measurement_distribution"])
         plot_circuit(r.h_c, cfg.reps, r.pf.ticker, images["qaoa_circuit"])
-    print(f"\nSaved: {json_path.name}, " + ", ".join(p.name for p in images.values()))
+    print(f"\nSaved: {json_path.name}, " + ", ".join(
+        p.name for p in images.values()))
     return summary
 
 

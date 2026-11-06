@@ -9,7 +9,8 @@ from qiskit.quantum_info import SparsePauliOp
 from scipy.optimize import OptimizeResult, minimize
 
 from portfolio_qaoa.config import Config
-from portfolio_qaoa.problem import (Portfolio, bitstring_to_x, cost_hamiltonian,
+from portfolio_qaoa.problem import (Portfolio, bitstring_to_x,
+                                    cost_hamiltonian,
                                     load_portfolio)
 
 
@@ -28,7 +29,8 @@ class QAOA:
         self.history: list[float] = []  # <C> per COBYLA evaluation
 
     def energy(self, params) -> np.ndarray:
-        """<ψ|H_C|ψ> + offset = expected cost C; params may be batched (..., 2p)."""
+        """<ψ|H_C|ψ> + offset = expected cost C; params may be batched (...,
+        2p)."""
         pub = (self.ansatz, self.h_c, np.asarray(params))
         return self.estimator.run([pub]).result()[0].data.evs + self.offset
 
@@ -77,7 +79,8 @@ def sample(qaoa: QAOA, params, pf: Portfolio,
            sampler: StatevectorSampler, shots: int) -> dict:
     circuit = qaoa.ansatz.assign_parameters(params)
     circuit.measure_all()
-    counts = sampler.run([circuit], shots=shots).result()[0].data.meas.get_counts()
+    counts = sampler.run([circuit], shots=shots).result()[
+        0].data.meas.get_counts()
     prob = dict.fromkeys(pf.all_x, 0.0)
     for bitstring, num in counts.items():
         prob[bitstring_to_x(bitstring)] = num / shots
@@ -104,7 +107,7 @@ class RunResult:
 
 
 def run(cfg: Config) -> RunResult:
-    """Grid search at p = 1, COBYLA at p = cfg.reps, then sampling.
+    """Grid search, COBYLA, then sampling.
 
     No output: printing and saving are left to the caller, so runs can be
     repeated freely, e.g. [run(replace(cfg, lam=lam)) for lam in lams].

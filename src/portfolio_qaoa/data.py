@@ -31,7 +31,8 @@ def load_prices(cfg: DataConfig) -> pd.DataFrame:
 
 def annualized_moments(returns: pd.DataFrame,
                        cfg: DataConfig) -> tuple[np.ndarray, np.ndarray]:
-    """Annualization (Hodson et al. 2019): does not change the optimal solution,
+    """Annualization (Hodson et al. 2019): does not change the optimal
+    solution,
     since risk and return term are scaled by the same factor, but gives
     sensible magnitudes for the angles in the circuit.
     """
@@ -42,7 +43,7 @@ def annualized_moments(returns: pd.DataFrame,
 
 def slide_table(prices: pd.DataFrame, returns: pd.DataFrame,
                 cfg: DataConfig) -> pd.DataFrame:
-    """Illustrative figures for slide 10."""
+    """Illustrative figures for a presentation slide"""
     return pd.DataFrame({
         "Return 2025": prices.iloc[-1] / prices.iloc[0] - 1,
         "Volatility p.a.": returns.std() * np.sqrt(cfg.trading_days_per_year),
@@ -51,7 +52,8 @@ def slide_table(prices: pd.DataFrame, returns: pd.DataFrame,
 
 def save(cfg: DataConfig, prices: pd.DataFrame, mu: np.ndarray,
          sigma: np.ndarray) -> None:
-    """Freeze the data – all further steps only read these files."""
+    """Freeze the data so all further steps only read these files."""
     DATA_DIR.mkdir(exist_ok=True)
-    np.savez(DATA_DIR / cfg.datafile, ticker=list(cfg.ticker), mu=mu, sigma=sigma)
+    np.savez(DATA_DIR / cfg.datafile, ticker=list(cfg.ticker), mu=mu,
+             sigma=sigma)
     prices.to_csv(DATA_DIR / cfg.pricefile)

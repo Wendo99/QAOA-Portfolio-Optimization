@@ -35,7 +35,8 @@ class Portfolio:
     def cost(self, x) -> float:
         """Portfolio objective C(x) = (1-λ) xᵀΣx - λ μᵀx."""
         x = np.asarray(x)
-        return float((1 - self.lam) * x @ self.sigma @ x - self.lam * self.mu @ x)
+        return float(
+            (1 - self.lam) * x @ self.sigma @ x - self.lam * self.mu @ x)
 
     @cached_property
     def all_x(self) -> list[tuple[int, ...]]:
@@ -43,7 +44,8 @@ class Portfolio:
 
     @cached_property
     def feasible(self) -> list[tuple[int, ...]]:
-        """Portfolios satisfying the budget, sorted by cost (the best first)."""
+        """Portfolios satisfying the budget, sorted by cost (the best
+        first)."""
         return sorted((x for x in self.all_x if sum(x) == self.budget),
                       key=self.cost)
 
@@ -65,7 +67,8 @@ class Portfolio:
 
     def name(self, x) -> str:
         """Portfolio as a string of ticker symbols, e.g., 'GOOG+NVDA'."""
-        return "+".join(t for t, xi in zip(self.ticker, x, strict=True) if xi) or "–"
+        return "+".join(
+            t for t, xi in zip(self.ticker, x, strict=True) if xi) or "–"
 
 
 def load_portfolio(cfg: Config) -> Portfolio:
@@ -86,7 +89,8 @@ def cost_hamiltonian(pf: Portfolio) -> tuple[SparsePauliOp, float]:
     return h_c, offset
 
 
-def check_hamiltonian(pf: Portfolio, h_c: SparsePauliOp, offset: float) -> None:
+def check_hamiltonian(pf: Portfolio, h_c: SparsePauliOp,
+                      offset: float) -> None:
     """Diagonal of H_C + offset must equal C(x) + α(Σx - B)² for every x."""
     diag = np.real(np.diag(h_c.to_matrix())) + offset
     for k in range(2 ** pf.n):
@@ -94,5 +98,6 @@ def check_hamiltonian(pf: Portfolio, h_c: SparsePauliOp, offset: float) -> None:
         expected = pf.cost(x) + pf.alpha * (sum(x) - pf.budget) ** 2
         if not np.isclose(diag[k], expected):
             raise ValueError(
-                f"H_C does not match the QUBO for x = {x}: {diag[k]} != {expected}"
+                f"H_C does not match the QUBO for x = {x}: {diag[k]} != "
+                f"{expected}"
             )
